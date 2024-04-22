@@ -1,6 +1,6 @@
-# UTME for Hate Speech Analsys
+# UTME for Social Media Job Analysis
 
-In the ever-evolving landscape of online communication, the rise of hate speech has become a pressing concern. To address this challenge, UTME emerges as a powerful solution. This tutorial explores the motivation behind using UTME and the importance of automated mining and monitoring of hate speech texts.
+In the ever-evolving landscape of online communication, the rise of hate speech has become a pressing concern. To face this challenge, UTME emerges as a powerful solution. This approach can also be replicated for other problems that the current technological scenario requires, as well as the analysis of the Social Media market, which companies are increasingly using to verify the best profiles of candidates for vacancies in this sector. This tutorial explores the motivation behind using the UTME and the importance of automated mining and monitoring of job advertisement texts.
 
 ### Motivation for Using UTME
 
@@ -8,23 +8,27 @@ Traditional methods of text classification often face limitations in adaptabilit
 
 ### Step-by-Step Tutorial: Putting UTME into Action
 
-Now, let's walk through a step-by-step on how to leverage UTME for hate speech detection:
+Now, let's go step by step on how to take advantage of the UTME to identify the most in-demand job profiles on social media:
 
 1. **Initialize UTME:**
    - Set up your UTME environment. UTME leverages Large Language Models (LLMs), demonstrating its effectiveness across proprietary, open-source, and low-computational-cost models. Its adaptability makes it a practical choice for users and organizations seeking advanced text mining capabilities without requiring extensive computational resources.
 
 
 ```python
-from utme.UTME import UTME
-from utme.BinaryClassifier import BinaryClassifier
-from utme.TaxonomyClassifier import TaxonomyClassifier
-from utme.SubcategoryGenerator import SubcategoryGenerator
+import json
+import openai
+import getpass
 
-# Initialize UTME with LLM (Language Model) credentials
-llm_key = "your_llm_key"
-llm_endpoint = "your_llm_url_endpoint"
-llm_options = {'model': "openchat_3.5", 'max_tokens': 1024}
-utme_base = UTME(llm_endpoint, llm_key, llm_options)
+
+def llm_labic_task(task,text,max_tokens=50000):
+  response = openai.ChatCompletion.create(
+      model="openchat_3.5",
+      messages = [{"role": "user", "content": text+'\n===\n'+task}]
+
+  )
+  s = response['choices'][0]['message']['content'].split("\n")
+
+  return s
 ```
 
 
