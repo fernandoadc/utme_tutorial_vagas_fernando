@@ -116,7 +116,7 @@ for category in df_filtered_level1.level1.unique():
 df_filtered_level2 = pd.concat(L)
 ```
 
-The SubcategoryGenerator in UTME is essential for unsupervised taxonomy expansion, creating subcategories within predefined categories. For example, if the TaxonomyClassifier identifies a document under "Gender-based Hate Speech," the SubcategoryGenerator can generate subcategories like "Sexual Harassment Language" or "Body-shaming" based on the document content. This unsupervised approach enables the system to discover subtopics without labeled data, enhancing exploratory analysis and taxonomy development.
+The SubcategoryGenerator in UTME is essential for unsupervised taxonomy expansion by creating subcategories within predefined categories. For example, if the TaxonomyClassifier identifies a document under "Social Media Strategy", the SubcategoryGenerator can generate subcategories such as "Social Media Profile Management" based on the content of the document. This unsupervised approach allows the system to discover subtopics without labeled data, improving exploratory analysis and taxonomy development.
 
 Access df_filtered_level2 to see the mapping result for each document.
 
