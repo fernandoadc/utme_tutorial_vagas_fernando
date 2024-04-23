@@ -29,11 +29,11 @@ utme_base = UTME(llm_endpoint, llm_key, llm_options)
 
 
 2. **Define Context and Taxonomy:**
-   - Clearly define the context and taxonomy relevant to hate speech detection. This step establishes the framework for classification.
+   - Clearly defines the relevant context and taxonomy for identifying job vacancies. This step establishes the framework for classification.
 
 
 ```python
-# Define context and taxonomy for hate speech analysis
+# Define context and taxonomy for job vacancies analysis
 context = '''The main topics from the text are: Social Media Manager, Social Media Specialist, Social Media Marketing, Social Media Coordinator, Social Media Editor, Social Media Strategist, Social Media Producer, Social Media Intern, Social Media Campaign Management, Social Media Content Producer, Social Media Management, Social Media Analyst, Social Media Executive, Social Media Curator, Social Media Guru, Social Media Officer, Social Media Associate, Social Media Marketing Manager, Social Media Buyer, Social Media and Content Manager, Social Media and Content Producer, Social Media Marketing Specialist, Social Media Marketing Manager, Social Media Sales Representative, Social Media Producer, Social Media Content Creation and Promotion, Social Media Editor, Social Media Manager, Social Media Lead, Social Media Analyst, Social Media Assistant/PA, Social Media Marketing Intern, Social Media and Marketing Administrator, Social Media Coordinator, Social Media Specialist, Social Media Marketing, Social Media Strategist, Social Media Support Coordinator, Social Media Marketing Strategist, Social Media Jobs, Social Media and Content Specialist, Social Media Internship.'''
 
 taxonomy = '''0 NONE
