@@ -15,20 +15,16 @@ Now, let's go step by step on how to take advantage of the UTME to identify the 
 
 
 ```python
-import json
-import openai
-import getpass
+from utme.UTME import UTME
+from utme.BinaryClassifier import BinaryClassifier
+from utme.TaxonomyClassifier import TaxonomyClassifier
+from utme.SubcategoryGenerator import SubcategoryGenerator
 
-
-def llm_labic_task(task,text,max_tokens=50000):
-  response = openai.ChatCompletion.create(
-      model="openchat_3.5",
-      messages = [{"role": "user", "content": text+'\n===\n'+task}]
-
-  )
-  s = response['choices'][0]['message']['content'].split("\n")
-
-  return s
+# Initialize UTME with LLM (Language Model) credentials
+llm_key = "your_llm_key"
+llm_endpoint = "your_llm_url_endpoint"
+llm_options = {'model': "openchat_3.5", 'max_tokens': 4096}
+utme_base = UTME(llm_endpoint, llm_key, llm_options)
 ```
 
 
@@ -38,19 +34,34 @@ def llm_labic_task(task,text,max_tokens=50000):
 
 ```python
 # Define context and taxonomy for hate speech analysis
-context = '''Hate speech refers to any form of communication that promotes prejudice, discrimination, or animosity against individuals or groups based on attributes such as race, ethnicity, religion, gender, sexual orientation, or other defining characteristics. Racial: Discriminatory language targeting a person's race or ethnicity. Religious: Prejudice or hostility based on someone's religious beliefs. Gender-based: Discrimination based on gender, often reinforcing traditional stereotypes. Sexual Orientation: Derogatory remarks about someone's sexual orientation. Disability-based: Offensive language related to a person's physical or mental abilities. Age-based: Discrimination based on a person's age, often manifesting as ageism. Nationality-based: Prejudice against individuals from a specific country or nationality. Class-based: Discrimination based on socioeconomic status or class. Appearance-based: Offensive remarks about a person's physical appearance. Language-based: Discriminatory language targeting a specific language or dialect. Political Affiliation: Prejudice based on a person's political beliefs or affiliation. Ideology-based: Discrimination related to a person's ideological views. Immigration Status: Discrimination based on a person's immigration or citizenship status. Body-shaming: Derogatory comments about a person's body size or shape. Educational Background: Discrimination based on a person's educational achievements or lack thereof. Refugees: Offensive language targeting individuals who are refugees or seeking asylum. Geographical Location: Discrimination based on a person's place of origin or residence. Weight-based: Offensive comments about a person's weight. Sexual Harassment Language: Offensive comments of a sexual nature that contribute to a hostile environment. Microaggressions: Subtle, often unintentional, expressions of prejudice or discrimination.'''
+context = '''The main topics from the text are: Social Media Manager, Social Media Specialist, Social Media Marketing, Social Media Coordinator, Social Media Editor, Social Media Strategist, Social Media Producer, Social Media Intern, Social Media Campaign Management, Social Media Content Producer, Social Media Management, Social Media Analyst, Social Media Executive, Social Media Curator, Social Media Guru, Social Media Officer, Social Media Associate, Social Media Marketing Manager, Social Media Buyer, Social Media and Content Manager, Social Media and Content Producer, Social Media Marketing Specialist, Social Media Marketing Manager, Social Media Sales Representative, Social Media Producer, Social Media Content Creation and Promotion, Social Media Editor, Social Media Manager, Social Media Lead, Social Media Analyst, Social Media Assistant/PA, Social Media Marketing Intern, Social Media and Marketing Administrator, Social Media Coordinator, Social Media Specialist, Social Media Marketing, Social Media Strategist, Social Media Support Coordinator, Social Media Marketing Strategist, Social Media Jobs, Social Media and Content Specialist, Social Media Internship.'''
 
-taxonomy = '''0 NONE: The @DOCUMENT does not contain hate speech
-1 Racial Hate Speech
-2 Religious Hate Speech
-3 Gender-based Hate Speech
-4 Sexual Orientation Hate Speech
-5 Disability-based Hate Speech
-6 Class-based Hate Speech
-7 Political Hate Speech
-8 Age-based Hate Speech
-9 Appearance-based Hate Speech
-10 Nationality-based Hate Speech'''
+taxonomy = '''0 NONE
+1 Social Media Manager
+2 Social Media Specialist
+3 Marketing & Social Media Specialist
+4 Social Media Editor
+5 Social Media Strategist/Producer
+6 Marketing Executive
+7 Business Development
+8 Lead the creative strategy for key social accounts
+9 Connect with us on Twitter and Instagram
+10 Social Media Producer
+11 Public Relations and Social Media Assistant Manager
+12 Equal Employment Opportunity for Individuals with Disabilities
+13 Social Media Content Curator and Manager
+14 Social Media Marketing Manager
+15 Job Opportunity: Client Services Agent (m/f/d) for ARABIC Social Media
+16 Senior Business Reporter (financial/business/technology) – digital media / social media platform
+17 Social Media Specialist
+18 Content Associate for Social Media and Entrepreneurial Platform
+19 Development and Social Media Coordinator
+20 Social Media Manager II
+21 Connect with us on Twitter and Instagram
+22 Intern- Social Media
+23 Social Media Curator
+24 Social Media Marketing Manager for Showtime Networks
+25 Social Media and Event Marketing Management'''
 ```
 
 In the UTME framework, the definition of context and taxonomy is flexible, requiring a degree of experimentation and creativity. It can be tailored to the specifics of the Large Language Model (LLM) used by UTME. While context is crucial throughout the process, it plays a pivotal role in BinaryClassification, thereby filtering texts of interest before taxonomy mapping.
