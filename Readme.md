@@ -69,7 +69,7 @@ In the UTME framework, the definition of context and taxonomy is flexible, requi
 For the taxonomy, used in TaxonomyClassifier, there is a specific format to follow. Each taxonomy item is a line starting with an increasing numerical identifier. It is imperative that the initial taxonomy item is "0 NONE", serving as the second filter for texts of interest.
 
 3. **Binary Classification for Text Filtering:**
-   - Use the Binary Classifier to filter texts of interest, focusing on documents that may contain hate speech.
+   - Use the Binary Classifier to filter texts of interest, focusing on documents that may contain job profiles.
 
 ```python
 # Start BinaryClassifier to filter documents of interest
@@ -92,9 +92,7 @@ df_filtered['level1'] = taxonomy_pred
 df_filtered_level1 = df_filtered[~df_filtered.level1.str.contains('NONE')]
 ```
 
-The TaxonomyClassifier utilizes a user-defined taxonomy tailored for hate speech detection. The predefined taxonomy consists of distinct levels, such as Racial Hate Speech, Religious Hate Speech, Gender-based Hate Speech, and more. By employing this module, users can effectively categorize and identify instances of hate speech within their text data, contributing to a comprehensive understanding of the specific nuances and themes associated with hateful content.
-
-It's worth noting that for the TaxonomyClassifier, only the structure of the hate speech taxonomy is needed, without relying on labeled data for training. 
+The TaxonomyClassifier utilizes a user-defined taxonomy. By employing this module, users can effectively categorize and identify instances of the most in-demand jobs in their text data.
 
 5. **Unsupervised Taxonomy Expansion – Second Level:**
    - Utilize the Subcategory Generator to dynamically expand the taxonomy, generating subcategories for more detailed analysis.
