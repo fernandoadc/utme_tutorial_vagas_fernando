@@ -1,6 +1,6 @@
-# UTME for Hate Speech Analsys
+# UTME for Social Media Job Analysis
 
-In the ever-evolving landscape of online communication, the rise of hate speech has become a pressing concern. To address this challenge, UTME emerges as a powerful solution. This tutorial explores the motivation behind using UTME and the importance of automated mining and monitoring of hate speech texts.
+In the ever-evolving landscape of online communication, the rise of hate speech has become a pressing concern. To face this challenge, UTME emerges as a powerful solution. This approach can also be replicated for other problems that the current technological scenario requires, as well as the analysis of the Social Media market, which companies are increasingly using to verify the best profiles of candidates for vacancies in this sector. This tutorial explores the motivation behind using the UTME and the importance of automated mining and monitoring of job advertisement texts.
 
 ### Motivation for Using UTME
 
@@ -8,7 +8,7 @@ Traditional methods of text classification often face limitations in adaptabilit
 
 ### Step-by-Step Tutorial: Putting UTME into Action
 
-Now, let's walk through a step-by-step on how to leverage UTME for hate speech detection:
+Now, let's go step by step on how to take advantage of the UTME to identify the most in-demand job profiles on social media:
 
 1. **Initialize UTME:**
    - Set up your UTME environment. UTME leverages Large Language Models (LLMs), demonstrating its effectiveness across proprietary, open-source, and low-computational-cost models. Its adaptability makes it a practical choice for users and organizations seeking advanced text mining capabilities without requiring extensive computational resources.
@@ -23,30 +23,45 @@ from utme.SubcategoryGenerator import SubcategoryGenerator
 # Initialize UTME with LLM (Language Model) credentials
 llm_key = "your_llm_key"
 llm_endpoint = "your_llm_url_endpoint"
-llm_options = {'model': "openchat_3.5", 'max_tokens': 1024}
+llm_options = {'model': "openchat_3.5", 'max_tokens': 4096}
 utme_base = UTME(llm_endpoint, llm_key, llm_options)
 ```
 
 
 2. **Define Context and Taxonomy:**
-   - Clearly define the context and taxonomy relevant to hate speech detection. This step establishes the framework for classification.
+   - Clearly defines the relevant context and taxonomy for identifying job vacancies. This step establishes the framework for classification.
 
 
 ```python
-# Define context and taxonomy for hate speech analysis
-context = '''Hate speech refers to any form of communication that promotes prejudice, discrimination, or animosity against individuals or groups based on attributes such as race, ethnicity, religion, gender, sexual orientation, or other defining characteristics. Racial: Discriminatory language targeting a person's race or ethnicity. Religious: Prejudice or hostility based on someone's religious beliefs. Gender-based: Discrimination based on gender, often reinforcing traditional stereotypes. Sexual Orientation: Derogatory remarks about someone's sexual orientation. Disability-based: Offensive language related to a person's physical or mental abilities. Age-based: Discrimination based on a person's age, often manifesting as ageism. Nationality-based: Prejudice against individuals from a specific country or nationality. Class-based: Discrimination based on socioeconomic status or class. Appearance-based: Offensive remarks about a person's physical appearance. Language-based: Discriminatory language targeting a specific language or dialect. Political Affiliation: Prejudice based on a person's political beliefs or affiliation. Ideology-based: Discrimination related to a person's ideological views. Immigration Status: Discrimination based on a person's immigration or citizenship status. Body-shaming: Derogatory comments about a person's body size or shape. Educational Background: Discrimination based on a person's educational achievements or lack thereof. Refugees: Offensive language targeting individuals who are refugees or seeking asylum. Geographical Location: Discrimination based on a person's place of origin or residence. Weight-based: Offensive comments about a person's weight. Sexual Harassment Language: Offensive comments of a sexual nature that contribute to a hostile environment. Microaggressions: Subtle, often unintentional, expressions of prejudice or discrimination.'''
+# Define context and taxonomy for job vacancies analysis
+context = '''The main topics from the text are: Social Media Manager, Social Media Specialist, Social Media Marketing, Social Media Coordinator, Social Media Editor, Social Media Strategist, Social Media Producer, Social Media Intern, Social Media Campaign Management, Social Media Content Producer, Social Media Management, Social Media Analyst, Social Media Executive, Social Media Curator, Social Media Guru, Social Media Officer, Social Media Associate, Social Media Marketing Manager, Social Media Buyer, Social Media and Content Manager, Social Media and Content Producer, Social Media Marketing Specialist, Social Media Marketing Manager, Social Media Sales Representative, Social Media Producer, Social Media Content Creation and Promotion, Social Media Editor, Social Media Manager, Social Media Lead, Social Media Analyst, Social Media Assistant/PA, Social Media Marketing Intern, Social Media and Marketing Administrator, Social Media Coordinator, Social Media Specialist, Social Media Marketing, Social Media Strategist, Social Media Support Coordinator, Social Media Marketing Strategist, Social Media Jobs, Social Media and Content Specialist, Social Media Internship.'''
 
-taxonomy = '''0 NONE: The @DOCUMENT does not contain hate speech
-1 Racial Hate Speech
-2 Religious Hate Speech
-3 Gender-based Hate Speech
-4 Sexual Orientation Hate Speech
-5 Disability-based Hate Speech
-6 Class-based Hate Speech
-7 Political Hate Speech
-8 Age-based Hate Speech
-9 Appearance-based Hate Speech
-10 Nationality-based Hate Speech'''
+taxonomy = '''0 NONE
+1 Social Media Manager
+2 Social Media Specialist
+3 Marketing & Social Media Specialist
+4 Social Media Editor
+5 Social Media Strategist/Producer
+6 Marketing Executive
+7 Business Development
+8 Lead the creative strategy for key social accounts
+9 Connect with us on Twitter and Instagram
+10 Social Media Producer
+11 Public Relations and Social Media Assistant Manager
+12 Equal Employment Opportunity for Individuals with Disabilities
+13 Social Media Content Curator and Manager
+14 Social Media Marketing Manager
+15 Job Opportunity: Client Services Agent (m/f/d) for ARABIC Social Media
+16 Senior Business Reporter (financial/business/technology) – digital media / social media platform
+17 Social Media Specialist
+18 Content Associate for Social Media and Entrepreneurial Platform
+19 Development and Social Media Coordinator
+20 Social Media Manager II
+21 Connect with us on Twitter and Instagram
+22 Intern- Social Media
+23 Social Media Curator
+24 Social Media Marketing Manager for Showtime Networks
+25 Social Media and Event Marketing Management'''
 ```
 
 In the UTME framework, the definition of context and taxonomy is flexible, requiring a degree of experimentation and creativity. It can be tailored to the specifics of the Large Language Model (LLM) used by UTME. While context is crucial throughout the process, it plays a pivotal role in BinaryClassification, thereby filtering texts of interest before taxonomy mapping.
@@ -54,7 +69,7 @@ In the UTME framework, the definition of context and taxonomy is flexible, requi
 For the taxonomy, used in TaxonomyClassifier, there is a specific format to follow. Each taxonomy item is a line starting with an increasing numerical identifier. It is imperative that the initial taxonomy item is "0 NONE", serving as the second filter for texts of interest.
 
 3. **Binary Classification for Text Filtering:**
-   - Use the Binary Classifier to filter texts of interest, focusing on documents that may contain hate speech.
+   - Use the Binary Classifier to filter texts of interest, focusing on documents that may contain job profiles.
 
 ```python
 # Start BinaryClassifier to filter documents of interest
@@ -64,7 +79,7 @@ df['y_pred'] = y_pred
 df_filtered = df[df.y_pred == 'YES']
 ```
 
-The BinaryClassifier module in UTME employs a few-shot prompt learning approach, utilizing only the provided context to make predictions. It operates by prompting the model with the contextual information and expects a binary response: YES for hate speech and NO for non hate speech. 
+The BinaryClassifier module in UTME employs a few-shot prompt learning approach, utilizing only the provided context to make predictions.
 
 4. **Taxonomy Mapping – First Level:**
    - Employ the Taxonomy Classifier to map documents within the predefined hierarchical taxonomy at the first level.
@@ -77,9 +92,7 @@ df_filtered['level1'] = taxonomy_pred
 df_filtered_level1 = df_filtered[~df_filtered.level1.str.contains('NONE')]
 ```
 
-The TaxonomyClassifier utilizes a user-defined taxonomy tailored for hate speech detection. The predefined taxonomy consists of distinct levels, such as Racial Hate Speech, Religious Hate Speech, Gender-based Hate Speech, and more. By employing this module, users can effectively categorize and identify instances of hate speech within their text data, contributing to a comprehensive understanding of the specific nuances and themes associated with hateful content.
-
-It's worth noting that for the TaxonomyClassifier, only the structure of the hate speech taxonomy is needed, without relying on labeled data for training. 
+The TaxonomyClassifier utilizes a user-defined taxonomy. By employing this module, users can effectively categorize and identify instances of the most in-demand jobs in their text data.
 
 5. **Unsupervised Taxonomy Expansion – Second Level:**
    - Utilize the Subcategory Generator to dynamically expand the taxonomy, generating subcategories for more detailed analysis.
@@ -103,12 +116,12 @@ for category in df_filtered_level1.level1.unique():
 df_filtered_level2 = pd.concat(L)
 ```
 
-The SubcategoryGenerator in UTME is essential for unsupervised taxonomy expansion, creating subcategories within predefined categories. For example, if the TaxonomyClassifier identifies a document under "Gender-based Hate Speech," the SubcategoryGenerator can generate subcategories like "Sexual Harassment Language" or "Body-shaming" based on the document content. This unsupervised approach enables the system to discover subtopics without labeled data, enhancing exploratory analysis and taxonomy development.
+The SubcategoryGenerator in UTME is essential for unsupervised taxonomy expansion by creating subcategories within predefined categories. For example, if the TaxonomyClassifier identifies a document under "Social Media Strategy", the SubcategoryGenerator can generate subcategories such as "Social Media Profile Management" based on the content of the document. This unsupervised approach allows the system to discover subtopics without labeled data, improving exploratory analysis and taxonomy development.
 
 Access df_filtered_level2 to see the mapping result for each document.
 
 6. **Graph-Based Analysis for Exploration:**
-   - Leverage UTME's graph-based analysis to visually explore document relationships, aiding in the identification and monitoring of hate speech patterns.
+   - Leverage UTME's graph-based analysis to visually explore document relationships, helping to identify and monitor vacancy profile patterns.
 
 
 ```python
@@ -117,7 +130,7 @@ sg = SubcategoryGenerator(tc)
 sg.graph_generation(df_filtered_level2)
 sg.graph_export_cosmograph(df_filtered_level2)
 ``` 
-![Graph - Hate Speech Analysis](https://raw.githubusercontent.com/Labic-ICMC-USP/UTME/main/tutoriais/hatespeech/graph_example.png "Graph - Hate Speech Analysis")
+![Graph - Hate Speech Analysis](https://github.com/fernandoadc/utme_tutorial_vagas_fernando/blob/main/fig_topics_graph.png "Graph - Job Vacancy Analysis")
 
 The UTME also facilitates graph analysis through the generated nodes.csv and edges.csv files, allowing for exploratory analysis of the results. In this graph, each hate speech text serves as a vertex, and similar texts are connected. UTME generates connections by exploring both document similarity and the predefined hate speech taxonomy. For analyzing large graphs, the Cosmograph app is recommended, providing robust features for graph visualization and exploration.
 
