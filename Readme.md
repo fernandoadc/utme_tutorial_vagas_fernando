@@ -143,7 +143,7 @@ df_tree = utme_hatespeech.df_filtered_level2[['text','level1','level2']]
 fig = px.treemap(df_tree, path=['level1', 'level2'],  color='level2',  color_continuous_scale='RdBu')
 fig.show()
 ``` 
-![Graph - Hate Speech Analysis](https://github.com/fernandoadc/utme_tutorial_vagas_fernando/blob/main/img2.png)"TreeMap - Job Vacancyes Analysis")
+![Graph - Hate Speech Analysis](https://github.com/fernandoadc/utme_tutorial_vagas_fernando/blob/main/img2.png "TreeMap - Job Vacancyes Analysis")
 
 # UTME_HateSpeech Class
 
