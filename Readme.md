@@ -121,7 +121,7 @@ The SubcategoryGenerator in UTME is essential for unsupervised taxonomy expansio
 Access df_filtered_level2 to see the mapping result for each document.
 
 6. **Graph-Based Analysis for Exploration:**
-   - Leverage UTME's graph-based analysis to visually explore document relationships, aiding in the identification and monitoring of hate speech patterns.
+   - Leverage UTME's graph-based analysis to visually explore document relationships, helping to identify and monitor vacancy profile patterns.
 
 
 ```python
