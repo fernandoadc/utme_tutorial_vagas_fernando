@@ -132,7 +132,7 @@ sg.graph_export_cosmograph(df_filtered_level2)
 ``` 
 ![Graph - Hate Speech Analysis](https://github.com/fernandoadc/utme_tutorial_vagas_fernando/blob/main/fig_topics_graph.png "Graph - Job Vacancy Analysis")
 
-The UTME also facilitates graph analysis through the generated nodes.csv and edges.csv files, allowing for exploratory analysis of the results. In this graph, each hate speech text serves as a vertex, and similar texts are connected. UTME generates connections by exploring both document similarity and the predefined hate speech taxonomy. For analyzing large graphs, the Cosmograph app is recommended, providing robust features for graph visualization and exploration.
+The UTME also facilitates graph analysis through the generated nodes.csv and edges.csv files, allowing for exploratory analysis of the results. In this graph, each job ad text serves as a vertex, and similar texts are connected. UTME generates connections by exploring both document similarity and the predefined hate speech taxonomy. For analyzing large graphs, the Cosmograph app is recommended, providing robust features for graph visualization and exploration.
 
 To navigate the taxonomy, we also suggest using TreeMaps:
 
@@ -145,12 +145,12 @@ fig.show()
 ``` 
 ![Graph - Hate Speech Analysis](https://github.com/fernandoadc/utme_tutorial_vagas_fernando/blob/main/img2.png "TreeMap - Job Vacancyes Analysis")
 
-# UTME_HateSpeech Class
+# UTME_JobVacancies Class
 
-The UTME_HateSpeech class consolidates all the stages of UTME into a single, user-friendly interface, simplifying the hate speech analysis process for users and analysts. This class encapsulates the Binary Classifier for text filtering, the Taxonomy Classifier for mapping documents to a predefined taxonomy, and the Unsupervised Taxonomy Expansion through the Subcategory Generator.
+The UTME_JobVacancies class consolidates all the stages of UTME into a single, user-friendly interface, simplifying the hate speech analysis process for users and analysts. This class encapsulates the Binary Classifier for text filtering, the Taxonomy Classifier for mapping documents to a predefined taxonomy, and the Unsupervised Taxonomy Expansion through the Subcategory Generator.
 
 ```python
-# UTME Hate Speech Analysis Tutorial
+# UTME Job Vacancies Analysis Tutorial
 
 from utme.UTME import UTME
 from utme.BinaryClassifier import BinaryClassifier
@@ -158,7 +158,7 @@ from utme.TaxonomyClassifier import TaxonomyClassifier
 from utme.SubcategoryGenerator import SubcategoryGenerator
 import pandas as pd
 
-class UTME_HateSpeech():
+class UTME_JobVacancies():
 
     def __init__(self, utme_base):
         self.utme_base = utme_base
@@ -220,7 +220,7 @@ llm_key = "your_llm_key"
 llm_endpoint = "your_llm_url_endpoint"
 llm_options = {'model': "openchat_3.5", 'max_tokens': 1024}
 utme_base = UTME(llm_endpoint, llm_key, llm_options)
-utme_hatespeech = UTME_HateSpeech(utme_base)
+utme_jobvacancies = UTME_JobVacancies(utme_base)
 
 
 # Dataset
@@ -235,22 +235,37 @@ df_label_no['y_true'] = 'NO'
 
 df = pd.concat([df_label_yes,df_label_no])
 
-# Define context and taxonomy for hate speech analysis
-context = '''Hate speech refers to any form of communication that promotes prejudice, discrimination, or animosity against individuals or groups based on attributes such as race, ethnicity, religion, gender, sexual orientation, or other defining characteristics. Racial: Discriminatory language targeting a person's race or ethnicity. Religious: Prejudice or hostility based on someone's religious beliefs. Gender-based: Discrimination based on gender, often reinforcing traditional stereotypes. Sexual Orientation: Derogatory remarks about someone's sexual orientation. Disability-based: Offensive language related to a person's physical or mental abilities. Age-based: Discrimination based on a person's age, often manifesting as ageism. Nationality-based: Prejudice against individuals from a specific country or nationality. Class-based: Discrimination based on socioeconomic status or class. Appearance-based: Offensive remarks about a person's physical appearance. Language-based: Discriminatory language targeting a specific language or dialect. Political Affiliation: Prejudice based on a person's political beliefs or affiliation. Ideology-based: Discrimination related to a person's ideological views. Immigration Status: Discrimination based on a person's immigration or citizenship status. Body-shaming: Derogatory comments about a person's body size or shape. Educational Background: Discrimination based on a person's educational achievements or lack thereof. Refugees: Offensive language targeting individuals who are refugees or seeking asylum. Geographical Location: Discrimination based on a person's place of origin or residence. Weight-based: Offensive comments about a person's weight. Sexual Harassment Language: Offensive comments of a sexual nature that contribute to a hostile environment. Microaggressions: Subtle, often unintentional, expressions of prejudice or discrimination.'''
+# Define context and taxonomy for job vacancies analysis
+context = '''The main topics from the text are: Social Media Manager, Social Media Specialist, Social Media Marketing, Social Media Coordinator, Social Media Editor, Social Media Strategist, Social Media Producer, Social Media Intern, Social Media Campaign Management, Social Media Content Producer, Social Media Management, Social Media Analyst, Social Media Executive, Social Media Curator, Social Media Guru, Social Media Officer, Social Media Associate, Social Media Marketing Manager, Social Media Buyer, Social Media and Content Manager, Social Media and Content Producer, Social Media Marketing Specialist, Social Media Marketing Manager, Social Media Sales Representative, Social Media Producer, Social Media Content Creation and Promotion, Social Media Editor, Social Media Manager, Social Media Lead, Social Media Analyst, Social Media Assistant/PA, Social Media Marketing Intern, Social Media and Marketing Administrator, Social Media Coordinator, Social Media Specialist, Social Media Marketing, Social Media Strategist, Social Media Support Coordinator, Social Media Marketing Strategist, Social Media Jobs, Social Media and Content Specialist, Social Media Internship.'''
 
-taxonomy = '''0 NONE: The @DOCUMENT does not contain hate speech
-1 Racial Hate Speech
-2 Religious Hate Speech
-3 Gender-based Hate Speech
-4 Sexual Orientation Hate Speech
-5 Disability-based Hate Speech
-6 Class-based Hate Speech
-7 Political Hate Speech
-8 Age-based Hate Speech
-9 Appearance-based Hate Speech
-10 Nationality-based Hate Speech'''
+taxonomy = '''0 NONE
+1 Social Media Manager
+2 Social Media Specialist
+3 Marketing & Social Media Specialist
+4 Social Media Editor
+5 Social Media Strategist/Producer
+6 Marketing Executive
+7 Business Development
+8 Lead the creative strategy for key social accounts
+9 Connect with us on Twitter and Instagram
+10 Social Media Producer
+11 Public Relations and Social Media Assistant Manager
+12 Equal Employment Opportunity for Individuals with Disabilities
+13 Social Media Content Curator and Manager
+14 Social Media Marketing Manager
+15 Job Opportunity: Client Services Agent (m/f/d) for ARABIC Social Media
+16 Senior Business Reporter (financial/business/technology) – digital media / social media platform
+17 Social Media Specialist
+18 Content Associate for Social Media and Entrepreneurial Platform
+19 Development and Social Media Coordinator
+20 Social Media Manager II
+21 Connect with us on Twitter and Instagram
+22 Intern- Social Media
+23 Social Media Curator
+24 Social Media Marketing Manager for Showtime Networks
+25 Social Media and Event Marketing Management'''
 
-utme_hatespeech.start(df, context, taxonomy)
+utme_jobvacancies.start(df, context, taxonomy)
 ```
 
 
