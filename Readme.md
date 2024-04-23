@@ -79,7 +79,7 @@ df['y_pred'] = y_pred
 df_filtered = df[df.y_pred == 'YES']
 ```
 
-The BinaryClassifier module in UTME employs a few-shot prompt learning approach, utilizing only the provided context to make predictions. It operates by prompting the model with the contextual information and expects a binary response: YES for hate speech and NO for non hate speech. 
+The BinaryClassifier module in UTME employs a few-shot prompt learning approach, utilizing only the provided context to make predictions.
 
 4. **Taxonomy Mapping – First Level:**
    - Employ the Taxonomy Classifier to map documents within the predefined hierarchical taxonomy at the first level.
